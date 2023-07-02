@@ -23,10 +23,11 @@ const getUserByID = async (req, res) => {
 
 const postUser = async (req, res) => {
   const newContact = await addContact(req.body);
-  res.status(newContact ? 201 : 400).json({
-    message: newContact || "missing required name field",
-    status: newContact ? "success" : "error",
-  });
+  if (newContact) {
+    res.status(201).json(newContact);
+  } else {
+    res.status(400).json({ message: "missing required name field" });
+  }
 };
 
 const putUser = async (req, res) => {
@@ -41,7 +42,6 @@ const deleteUser = async (req, res) => {
   await removeContact(req.user);
   return res.status(200).json({
     message: "contact deleted",
-    status: "success",
   });
 };
 

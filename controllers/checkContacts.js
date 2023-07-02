@@ -3,7 +3,7 @@ const { validationUser } = require("../models/validation");
 
 const validUser = (req, res, next) => {
   const { error, value } = validationUser(req.body);
-
+  console.log(error, value);
   if (error === undefined) {
     req = value;
     next();
@@ -11,7 +11,6 @@ const validUser = (req, res, next) => {
   }
   return res.status(400).json({
     message: error.message,
-    status: "error",
   });
 };
 
