@@ -24,7 +24,6 @@ const checkContact = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({
         message: "Not found",
-        status: "error",
       });
     }
     req.user = user;
