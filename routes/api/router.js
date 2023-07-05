@@ -25,7 +25,3 @@ router.patch("/:id/favorite", checkUser, updateStatusContact);
 router.delete("/:id", checkUser, deleteUser);
 
 module.exports = router;
-
-// router.route.get("/", getAllUser).post("/", postUser);
-// router.use("/:id", checkUser);
-// router.route("/:id").get(getUserByID).put(putUser).delete(deleteUser);

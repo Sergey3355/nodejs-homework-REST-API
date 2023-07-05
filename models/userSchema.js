@@ -21,7 +21,6 @@ const mySchema = new Schema({
     type: Boolean,
     default: false,
   },
-  // не показывать поле прописать select:false
 });
 
 const MyModel = model("contacts", mySchema);
