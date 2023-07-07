@@ -41,7 +41,16 @@ const putUser = async (req, res) => {
   if (changingTheFields) {
     res.status(200).json(changingTheFields);
   } else {
-    res.status(404).json({ message: "Not found" });
+    const arr = ["name", "phone", "email"];
+    const reqArr = Object.keys(req.body);
+    const difference = arr.filter((x) => !reqArr.includes(x));
+    if (difference.length) {
+      res
+        .status(400)
+        .json({ message: `missing required ${difference[0]} field` });
+    } else {
+      res.status(404).json({ message: "Not found" });
+    }
   }
 };
 
