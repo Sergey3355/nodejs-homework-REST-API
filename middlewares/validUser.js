@@ -6,16 +6,19 @@ const validUser = (req, res, next) => {
   if (error) {
     return res.status(404).json({
       message: error.message,
-      status: "error",
     });
   }
   const { name, email, phone } = value;
 
   if (!name || !email || !phone) {
-    res.status(400).json({
-      message: "missing required name field",
-      status: "error",
-    });
+    const arr = ["name", "phone", "email"];
+    const reqArr = Object.keys(req.body);
+
+    const difference = arr.filter((x) => !reqArr.includes(x));
+
+    res
+      .status(400)
+      .json({ message: `missing required ${difference[0]} field` });
     return;
   }
   req = value;

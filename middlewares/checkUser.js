@@ -7,7 +7,6 @@ const checkUser = tryCatch(async (req, res, next) => {
   if (!userExist) {
     return res.status(404).json({
       message: "Not found",
-      status: "error",
     });
   }
 

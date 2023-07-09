@@ -6,25 +6,16 @@ const getAllUser = tryCatch(async (req, res) => {
   console.log(d);
   const data = await MyModel.find().select("-__v");
 
-  res.status(200).json({
-    message: data,
-    status: "success",
-  });
+  res.status(200).json(data);
 });
 
 const getUserByID = (req, res) => {
-  res.status(200).json({
-    message: req.user,
-    status: "success",
-  });
+  res.status(200).json(req.user);
 };
 
 const postUser = tryCatch(async (req, res) => {
   const newContact = await MyModel.create(req.body);
-  res.status(201).json({
-    message: newContact,
-    status: "success",
-  });
+  res.status(201).json(newContact);
 });
 
 const updateContact = tryCatch(async (req, res) => {
@@ -33,10 +24,7 @@ const updateContact = tryCatch(async (req, res) => {
     new: true,
   }).select("-__v");
 
-  res.status(200).json({
-    message: putContact,
-    status: "success",
-  });
+  res.status(200).json(putContact);
 });
 
 const updateStatusContact = tryCatch(async (req, res) => {
@@ -45,25 +33,20 @@ const updateStatusContact = tryCatch(async (req, res) => {
   if (!Object.keys(req.body).includes("favorite")) {
     return res.status(400).json({
       message: "Missing field favorite",
-      status: "error",
     });
   }
   const updateStatus = await MyModel.findOneAndUpdate({ _id: id }, req.body, {
     new: true,
   }).select("-__v");
 
-  res.status(200).json({
-    message: updateStatus,
-    status: "success",
-  });
+  res.status(200).json(updateStatus);
 });
 
 const deleteUser = tryCatch(async (req, res) => {
   await MyModel.findByIdAndDelete({ _id: req.user.id });
 
   return res.status(200).json({
-    message: "contact deleted",
-    status: "success",
+    message: "contact deleted"
   });
 });
 
